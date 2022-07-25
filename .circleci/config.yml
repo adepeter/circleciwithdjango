@@ -16,7 +16,9 @@ jobs:
           command: python manage.py test
       - run:
           name: Build docker image
-          command: docker-compose build
+          command: |
+            docker-compose build
+            docker images
 
 workflows:
   build-and-test-workflow:
