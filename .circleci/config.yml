@@ -4,6 +4,13 @@ jobs:
   test-and-lint:
     docker:
       - image: cimg/python:3.10.5
+        command: |
+          sudo apt-get update -y
+      - image: cimg/postgres:14.4.0-postgis
+        environment:
+          POSTGRES_HOST: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
     steps:
       - checkout
       - setup_remote_docker:
