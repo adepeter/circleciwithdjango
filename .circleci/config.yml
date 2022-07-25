@@ -4,8 +4,6 @@ jobs:
   test-and-lint:
     docker:
       - image: cimg/python:3.10.5
-        command: |
-          sudo apt-get update -y
       - image: cimg/postgres:14.4-postgis
         environment:
           POSTGRES_HOST: postgres
@@ -26,7 +24,7 @@ jobs:
           command: |
             docker-compose build
             docker images
-            docker container run --name shopwithcircleci shopwithcircleci python manage.py test
+            docker container run --name shopwithcircleci shopwithcircleci --network container:shopwithcircleci python manage.py test
 
 workflows:
   build-and-test-workflow:
