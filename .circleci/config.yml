@@ -12,30 +12,21 @@ jobs:
     steps:
       - checkout
       -  run:
-           name: Install required deps
+           name: Install Host Machine Dependencies (ie packages)
            command: |
              sudo apt-get update -y
              sudo apt-get install python3-dev build-essential binutils -y
-             sudo apt-get dist-upgrade -y
              sudo apt-get upgrade -y
              sudo apt-get install libmysqlclient-dev -y
-             sudo apt-get install default-libmysqlclient-dev -y
+             sudo apt-get install default-libmysqlclient-dev libpq-dev -y
              sudo apt-get install libgdal-dev libproj-dev gdal-bin python3-gdal cron \
-             postgresql-client gettext postgresql postgresql-contrib postgis -y
-      - setup_remote_docker:
-          version: 20.10.14
+             postgresql-client gettext postgresql postgresql-contrib postgis python3-psycopg2 -y
       - run:
-          name: install dependencies
+          name: Install Django App pip dependencies
           command: pip install -r requirements.txt
       - run:
           name: run tests
           command: python manage.py test
-      - run:
-          name: Build docker image
-          command: |
-            docker-compose build
-            docker images
-            docker container run --name shopwithcircleci shopwithcircleci -e DATABASE_URL=hello python manage.py test
 
 workflows:
   build-and-test-workflow:
