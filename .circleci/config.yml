@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  python: circleci/python@2.0.3
+
 jobs:
   test-and-lint:
     docker:
@@ -21,12 +24,12 @@ jobs:
              sudo apt-get install default-libmysqlclient-dev libpq-dev -y
              sudo apt-get install libgdal-dev libproj-dev gdal-bin python3-gdal cron \
              postgresql-client gettext postgresql postgresql-contrib postgis python3-psycopg2 -y
+      - python/install-packages:
+          pkg-manager: pipenv
       - run:
-          name: Install Django App pip dependencies
-          command: pip install -r requirements.txt
-      - run:
-          name: run tests
-          command: python manage.py test
+          name: Run test case
+          command: |
+            pipenv run python manage.py test
 
 workflows:
   build-and-test-workflow:
