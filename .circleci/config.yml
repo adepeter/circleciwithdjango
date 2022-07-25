@@ -7,11 +7,13 @@ jobs:
   test-and-lint:
     docker:
       - image: cimg/python:3.10.5
+        environment:
+          DATABASE_URL: postgis://shop_user:shop_password@localhost:5432/shop_db
       - image: cimg/postgres:14.4-postgis
         environment:
-          POSTGRES_HOST: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: shop_db
+          POSTGRES_USER: shop_user
+          POSTGRES_PASSWORD: shop_password
     steps:
       - checkout
       - run:
@@ -29,7 +31,6 @@ jobs:
       - run:
           name: Run test case
           command: |
-            pipenv run python manage.py test
             pipenv run coverage run manage.py test
       - store_test_results:
           path: test-results
