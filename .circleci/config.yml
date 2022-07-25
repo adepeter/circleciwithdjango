@@ -11,6 +11,11 @@ jobs:
           POSTGRES_PASSWORD: postgres
     steps:
       - checkout
+      -  run:
+           name: Install required deps
+           command: |
+             sudo apt-get update -y
+             sudo apt-get install build-essential -y
       - setup_remote_docker:
           version: 20.10.14
       - run:
