@@ -23,8 +23,8 @@ ARG ENV
 RUN pip install --upgrade pip && pip install gunicorn && pip install -r requirements.txt
 COPY . /usr/src/app/
 
-RUN bash -c "chmod +x ./docker/run.sh"
+RUN bash -c "chmod +x ./setup.sh"
 
 EXPOSE 8000 90 80
 
-CMD ["./docker/run.sh"]
+CMD ["./setup.sh"]
