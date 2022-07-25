@@ -4,7 +4,7 @@ orbs:
   python: circleci/python@2.0.3
 
 jobs:
-  test-and-lint:
+  build-and-test-app:
     docker:
       - image: cimg/python:3.10.5
         environment:
@@ -25,7 +25,7 @@ jobs:
             sudo apt-get install libmysqlclient-dev -y
             sudo apt-get install default-libmysqlclient-dev libpq-dev gcc -y
             sudo apt-get install libgdal-dev libproj-dev gdal-bin python3-gdal cron \
-            postgresql-client gettext postgresql postgresql-contrib postgis python3-psycopg2 -y
+            postgresql-client gettext postgresql postgresql-contrib postgis python3-psycopg2 make -y
       - python/install-packages:
           pkg-manager: pipenv
       - run:
