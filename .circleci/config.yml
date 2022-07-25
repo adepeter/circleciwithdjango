@@ -21,7 +21,7 @@ jobs:
              sudo apt-get install python3-dev build-essential binutils -y
              sudo apt-get upgrade -y
              sudo apt-get install libmysqlclient-dev -y
-             sudo apt-get install default-libmysqlclient-dev libpq-dev -y
+             sudo apt-get install default-libmysqlclient-dev libpq-dev gcc -y
              sudo apt-get install libgdal-dev libproj-dev gdal-bin python3-gdal cron \
              postgresql-client gettext postgresql postgresql-contrib postgis python3-psycopg2 -y
       - python/install-packages:
@@ -30,6 +30,12 @@ jobs:
           name: Run test case
           command: |
             pipenv run python manage.py test
+            coverage run manage.py test
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+          destination: tr1
 
 workflows:
   build-and-test-workflow:
