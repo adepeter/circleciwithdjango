@@ -41,4 +41,4 @@ jobs:
 workflows:
   build-and-test-workflow:
     jobs:
-      - test-and-lint
+      - build-and-test-app
