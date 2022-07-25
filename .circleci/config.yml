@@ -37,20 +37,7 @@ jobs:
           path: test-results
           destination: tr1
 
-  test-using-docker:
-    docker:
-      - image: cimg/python:3.10.5
-    steps:
-      - checkout
-      - setup_remote_docker:
-          version: 20.10.14
-      -run:
-        name: Build Docker Image
-        command: |
-          docker compose up -d
-
 workflows:
   build-and-test-workflow:
     jobs:
       - test-and-lint
-      - test-using-docker
