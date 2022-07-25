@@ -15,7 +15,9 @@ jobs:
            name: Install required deps
            command: |
              sudo apt-get update -y
-             sudo apt-get install build-essential -y
+             sudo apt-get install build-essential binutils -y
+             sudo apt-get install libgdal-dev libproj-dev gdal-bin python3-gdal cron \
+             postgresql-client gettext postgresql postgresql-contrib postgis -y
       - setup_remote_docker:
           version: 20.10.14
       - run:
