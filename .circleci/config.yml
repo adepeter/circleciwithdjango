@@ -30,7 +30,7 @@ jobs:
           name: Run test case
           command: |
             pipenv run python manage.py test
-            coverage run manage.py test
+            pipenv run coverage run manage.py test
       - store_test_results:
           path: test-results
       - store_artifacts:
