@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+  backend:
+    image: shopwithcircleci
+    container_name: shopwithcircleci
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - db
+    environment:
+      - DATABASE_URL=postgis://postgres:postgres@postgis/postgres
+      - DEPLOYMENT_ENVIRONMENT=locals
+    volumes:
+      - .:/usr/src/app/
+    restart: unless-stopped
+    depends_on:
+      - postgis
+    ports:
+        - "8000:80"
+
+
+  postgis:
+    image: postgis/postgis
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    restart: always
+    networks:
+      - db
+    volumes:
+        - postgres_data:/var/lib/postgres/data
+
+volumes:
+  postgres_data:
+networks:
+  db:
