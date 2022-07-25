@@ -6,7 +6,7 @@ jobs:
       - image: cimg/python:3.10.5
         command: |
           sudo apt-get update -y
-      - image: cimg/postgres:14.4.0-postgis
+      - image: cimg/postgres:14.4-postgis
         environment:
           POSTGRES_HOST: postgres
           POSTGRES_USER: postgres
