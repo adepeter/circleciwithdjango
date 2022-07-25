@@ -31,12 +31,9 @@ jobs:
       - run:
           name: Run test case
           command: |
-            pipenv run coverage run -m pytest --disable-warnings --reuse-db
-            pipenv run coverage html
-            pipenv run coverage xml
             pipenv run python manage.py test
       - store_test_results:
-          path: htmlcov
+          path: test-results
       - store_artifacts:
           path: test-results
           destination: tr1
