@@ -16,7 +16,7 @@ jobs:
           command: python manage.py test
       - run:
           name: Build docker image
-          command: docker image build -t shopwithcircleci .
+          command: docker-compose build
 
 workflows:
   build-and-test-workflow:
