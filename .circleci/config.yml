@@ -14,16 +14,16 @@ jobs:
           POSTGRES_PASSWORD: postgres
     steps:
       - checkout
-      -  run:
-           name: Install Host Machine Dependencies (ie packages)
-           command: |
-             sudo apt-get update -y
-             sudo apt-get install python3-dev build-essential binutils -y
-             sudo apt-get upgrade -y
-             sudo apt-get install libmysqlclient-dev -y
-             sudo apt-get install default-libmysqlclient-dev libpq-dev gcc -y
-             sudo apt-get install libgdal-dev libproj-dev gdal-bin python3-gdal cron \
-             postgresql-client gettext postgresql postgresql-contrib postgis python3-psycopg2 -y
+      - run:
+          name: Install Host Machine Dependencies (ie packages)
+          command: |
+            sudo apt-get update -y
+            sudo apt-get install python3-dev build-essential binutils -y
+            sudo apt-get upgrade -y
+            sudo apt-get install libmysqlclient-dev -y
+            sudo apt-get install default-libmysqlclient-dev libpq-dev gcc -y
+            sudo apt-get install libgdal-dev libproj-dev gdal-bin python3-gdal cron \
+            postgresql-client gettext postgresql postgresql-contrib postgis python3-psycopg2 -y
       - python/install-packages:
           pkg-manager: pipenv
       - run:
@@ -45,9 +45,9 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
       -run:
-          name: Build Docker Image
-          command: |
-            docker compose up -d
+        name: Build Docker Image
+        command: |
+          docker compose up -d
 
 workflows:
   build-and-test-workflow:
