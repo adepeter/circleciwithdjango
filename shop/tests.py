@@ -1,3 +1,4 @@
+import pytest
 from django.test import TestCase
 
 # Create your tests here.
@@ -5,6 +6,7 @@ from shop.models import Shop
 
 
 class ShopTestCase(TestCase):
+
     def test_shop_creation(self):
         first_shop = Shop.objects.create(name='Ice cream')
         second_shop = Shop.objects.create(name='Second Shop')
